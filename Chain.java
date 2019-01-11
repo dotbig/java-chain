@@ -44,6 +44,34 @@ public class Chain<T>{
 	}
 
 
+	public T pop(){
+		if (head == null){
+			return null;
+		}
+		T data = tail.data;
+		if (head == tail){
+			head = null;
+			tail = null;
+			return data;
+		}
+		Link<T> current = head;
+		while (current.next != tail){
+			current = current.next;
+		}
+		current.next = null;
+		tail = current;
+		return data;
+	}
+
+
+//	public T dequeue(){
+//		if (head == null){
+//			return null;
+//		}
+//
+//	}
+
+
 	public T first(){
 		if (head == null){
 			return null;
@@ -107,7 +135,12 @@ public class Chain<T>{
 		}
 		if (index == 0){
 			data = head.data;
-			head = head.next;
+			if (head.next == null){
+				head = null;
+				//tail = null;
+			} else {
+				head = head.next;	
+			}
 			return data;
 		}
 		Link<T> current = head;
